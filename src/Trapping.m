@@ -286,25 +286,26 @@ classdef Trapping < handle
                 vy = traj(end,6)+0.5*(ay+ay2)*dt;
                 vz = traj(end,7)+0.5*(az+az2)*dt;
                 
-                %%%
+                %%% Molecules are considered lost if they are 1) out of the
+                %%% acceleration field range (x < 5 mm, y/z < 2 mm) or 2)
+                %%% radially out of coil's hole when passing through coil
                 if (~(abs(traj(end,3)) < 0.002 && abs(traj(end,4)) < 0.002 && traj(end,2) < 0.005 && traj(end,2) > -0.015)) ...
                         || (traj(end,2)>-0.0065 && traj(end,2)<-0.002 && traj(end,3)^2+traj(end,4)^2>obj.params.TRAP_coil_inner_radis^2)
                     break
                 end
-                %%%
+                %%% Molecules considered lost if their postions overlap with
+                %%% ion trap electrodes
                 if abs(traj(end,2)) > obj.params.TRAP_ion_trap_horiz_surf2surf/2 ...
                         && abs(traj(end,2)) < obj.params.TRAP_ion_trap_horiz_surf2surf/2 + obj.params.TRAP_ion_trap_thickness ...
                         && abs(traj(end,3)) > obj.params.TRAP_ion_trap_vert_surf2surf/2
                     break
                 end
 
-                traj(end+1,:) = [t+dt, x, y, z, vx, vy, vz];     %如果满足上述条件就保存下来，不满足就舍弃。
-                    %obj.xyzVxyz = obj.xyzVxyz(abs(obj.xyzVxyz(:,2)) < 0.001 & abs(obj.xyzVxyz(:,3)) < 0.001 & (abs(obj.xyzVxyz(:,1) - obj.xyzVxyz(1,1)) < 2* 5.5e-3), :);
-                    %probably control of range needed, like obj.xyzVxyz = obj.xyzVxyz((obj.xyzVxyz(:,1) < 0.004), :);
+                traj(end+1,:) = [t+dt, x, y, z, vx, vy, vz]; 
             end
             if abs(traj(end,2)) <= 0.002  %  trap control 
                 obj.traj_time = traj(:,1);
-                obj.traj_xyzVxyz = [traj(:,2), traj(:,3), traj(:,4), traj(:,5), traj(:,6), traj(:,7)];
+                obj.traj_xyzVxyz = traj(:, 2:7);% [traj(:,2), traj(:,3), traj(:,4), traj(:,5), traj(:,6), traj(:,7)];
             else
                 obj.traj_time = [];
                 obj.traj_xyzVxyz = [];

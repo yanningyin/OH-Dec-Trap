@@ -58,6 +58,10 @@ function params = Parameters(varargin)
     
     
     % Trapping
+    params.TRAP_magnet_ID = 7.5e-3; % in mm
+    params.TRAP_magnet_OD = 20e-3;
+    params.TRAP_magnet_thickness = 4.5e-3;
+    params.TRAP_center_to_magnet = 2e-3; % center to surface of magnet
     params.TRAP_coil_inner_radis = 1.5e-3;
     params.TRAP_ion_trap_horiz_surf2surf = 1.5e-3;
     params.TRAP_ion_trap_vert_surf2surf = 2.0e-3;

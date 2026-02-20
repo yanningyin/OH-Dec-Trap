@@ -4,7 +4,7 @@ addpath('src')
 rng('default') % fix the seed of the random nunber generator to be removed afterwards
 params = Parameters();
 
-example_no = 3; %{1: only dec; 2: only trap; 3: both}
+example_no = 7; %{1: only dec; 2: only trap; 3: both}
 
 switch example_no
     case 1
@@ -55,9 +55,9 @@ switch example_no
             end
             
             hold on
-          
         end
-        trap.propagateParticles_verlet(nsteps)
+        fprintf('%d particles trapped.', k-1);
+        % trap.propagateParticles_verlet(nsteps)
         % trap.plotTOF();
 
         % data = [trap.traj_time, trap.traj_xyzVxyz];      % one of OH molecules trajectory, it isn't all of trapped OH trajectory
@@ -67,6 +67,14 @@ switch example_no
             save(filename, 'trajectory','-v7.3');  % 保存变量 trajectory 到 .mat 文件
         end
         toc;
+
+    case 7
+        % Replot the trajectories during loading and trapping
+        path_to_traj_mat_file = './test.mat';
+        load(path_to_traj_mat_file);
+        for k=1:length(trajectory(1,1,:))
+            plot3(trajectory(:,2,k), trajectory(:,3,k), trajectory(:,4,k));hold on;
+        end
 
     case 4
         % Example: optimizing the trap loading parameters with three

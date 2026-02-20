@@ -1,0 +1,66 @@
+# List of untracked files to ignore
+
+# MATLAB
+*.mat
+*.out
+*.fig 
+*.asv
+*.prj
+*/resources/project/*
+
+# temporary files
+~*
+*~
+*~*
+*$*
+
+# heavy files that should never be synched with git!
+*.png
+*.jpg
+*.pdf
+*.dat
+*.csv
+*.xls
+*.h5
+*.out
+
+# exec and compiled code
+*.o
+*.so
+
+# system files 
+*.db 
+**/.DS_Store
+*.nb
+
+
+# python
+__pycache__
+**/.idea
+*.npy
+.ipynb_checkpoints
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# others
+*.xml
+*.DS_Store
+
+# user defined
+*.err
+*.old.*
+*.temp.*
+*.tmp.*

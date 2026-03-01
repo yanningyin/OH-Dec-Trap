@@ -1284,7 +1284,10 @@ classdef Deceleration < handle
                     if size(obj.xyzVxyz,1) == 0
                         error("All the molecules are lost after the %d switching!",i-1)
                     end
-%                     fprintf("%d/%d\t%d\n",size(obj.xyzVxyz,1), obj.params.num_particles, i);
+                    % Print process                   
+                    if mod(i/(length(obj.M_time_vec) - 2)*100, 10) == 0
+                        fprintf("deceleration process: %d%%\n", 100*i/(length(obj.M_time_vec) - 2));
+                    end
                     if mod(i, 8) == 1
                         accx = obj.ax_norm_interpl(obj.xyzVxyz(:,1), obj.xyzVxyz(:,2), obj.xyzVxyz(:,3));
                         accy = [0;obj.ay_norm_interpl(obj.xyzVxyz(2:end,1), obj.xyzVxyz(2:end,2), obj.xyzVxyz(2:end,3))];

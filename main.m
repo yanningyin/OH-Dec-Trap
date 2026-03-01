@@ -4,7 +4,7 @@ addpath('src')
 rng('default') % fix the seed of the random nunber generator to be removed afterwards
 params = Parameters();
 
-example_no = 7; %{1: only dec; 2: only trap; 3: both}
+example_no = 8; %{1: only dec; 2: only trap; 3: both}
 
 switch example_no
     case 1
@@ -41,11 +41,11 @@ switch example_no
         trajectory = [];
         k = 1;
         for i=1:length(trap.xyzVxyz_0)  % 对从减速器出来的粒子进行遍历，求它们的轨迹。
-            trap.trajectory(trap.xyzVxyz_0(i,:),nsteps)  %进行轨迹计算
+            trap.trajectory(trap.xyzVxyz_0(i,:),nsteps)  % Calculate trajectories
             if isempty(trap.traj_xyzVxyz)      % jump up untrapped molecule
                 continue
-            else
-                plot3(trap.traj_xyzVxyz(:,1), trap.traj_xyzVxyz(:,2),trap.traj_xyzVxyz(:,3))
+            % else
+            %     plot3(trap.traj_xyzVxyz(:,1), trap.traj_xyzVxyz(:,2),trap.traj_xyzVxyz(:,3))
 
             end
             if length(trap.traj_time) == nsteps + 1
@@ -75,6 +75,38 @@ switch example_no
         for k=1:length(trajectory(1,1,:))
             plot3(trajectory(:,2,k), trajectory(:,3,k), trajectory(:,4,k));hold on;
         end
+
+    case 8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+        % Example: simulate the whole process
+        tic;
+        params = Parameters('num_particles', 20000000);
+        beam = Beam(params);
+        beam.createParticles();
+        nsteps = 10000;
+        dec = Deceleration(params, beam);
+        dec.propagateParticles_verlet();
+        trap = Trapping(params, dec);
+        %trap.testnrsteps(); 
+        % trajectory = zeros(nsteps+1,7);
+        trajectory = [];
+        k = 1;
+        for i=1:length(trap.xyzVxyz_0)  % 对从减速器出来的粒子进行遍历，求它们的轨迹。
+            trap.trajectory(trap.xyzVxyz_0(i,:),nsteps)  % Calculate trajectories
+            if isempty(trap.traj_xyzVxyz)      % jump up untrapped molecule
+                continue
+            end
+            if length(trap.traj_time) == nsteps + 1
+                trajectory(:,1,k) = trap.traj_time;
+                trajectory(:,2:7,k) = trap.traj_xyzVxyz;
+                k = k + 1;
+            end
+        end
+        fprintf('%d particles trapped\n', k-1);
+        
+        timestamp = string(datetime('now','Format','yyyyMMdd_HHmmss'));
+        filename = "./data/traj/traj_data_" + timestamp + ".mat";
+        save(filename, 'trajectory','-v7.3');  % 保存变量 trajectory 到 .mat 文件
+        toc;
 
     case 4
         % Example: optimizing the trap loading parameters with three

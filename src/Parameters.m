@@ -3,7 +3,7 @@ function params = Parameters(varargin)
     params = struct();
 
     % Initial molecular beams
-    params.num_particles = 10000;
+    params.num_particles = 100000000;
     params.BEAM_avg_velocity_beam = 480; % Average velocity incoming package (m/s) 
     params.BEAM_radius_of_nozzle = 0.25e-3; % radius of the valve nozzle (m)
     params.BEAM_long_pos_spread = 11.5e-3; %  longitudinal position spread (m) - along x aixs or beam propagation
@@ -76,6 +76,7 @@ function params = Parameters(varargin)
     % This function can accept optional name-value pair arguments, useful for, e.g. optimization
     % Usage outside this script: params = Parameters('Trap_coil_current', 88, ...)
     parser = inputParser;
+    addParameter(parser, 'num_particles', params.num_particles, @isnumeric);
     addParameter(parser, 'TRAP_coil_current', params.TRAP_coil_current, @isnumeric);
     addParameter(parser, 'TRAP_coil_onset_time', params.TRAP_coil_onset_time, @isnumeric)
     addParameter(parser, 'TRAP_coil_duration', params.TRAP_coil_duration, @isnumeric)
@@ -86,12 +87,14 @@ function params = Parameters(varargin)
     catch ME
         fprintf('Error: %s\n', ME.message);
         fprintf('Acceptable name-value pair arguments are:\n');
+        fprintf('  ''num_particles'' (numberic)\n');
         fprintf('  ''TRAP_coil_current'' (numberic)\n');
         fprintf('  ''TRAP_coil_onset_time'' (numeric)\n');
         fprintf('  ''TRAP_coil_duration'' (numeric)\n');
         return;
     end
 
+    params.num_particles = parser.Results.num_particles;
     params.TRAP_coil_current = parser.Results.TRAP_coil_current; % A
     params.TRAP_coil_onset_time = parser.Results.TRAP_coil_onset_time;% s
     params.TRAP_coil_duration = parser.Results.TRAP_coil_duration; % s

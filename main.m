@@ -79,7 +79,7 @@ switch example_no
     case 8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         % Example: simulate the whole process
         tic;
-        params = Parameters('num_particles', 20000000);
+        params = Parameters('num_particles', 50000000);
         beam = Beam(params);
         beam.createParticles();
         nsteps = 10000;

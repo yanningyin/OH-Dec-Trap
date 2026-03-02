@@ -5,8 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1                       # Number of tasks
 #SBATCH --cpus-per-task=24
-#SBATCH --index_funct=1
-#SBATCH --mem-per-cpu=5G
+#SBATCH --mem=128G                        # Memory per node
 #SBATCH --partition=wcpu
 
 # export COMP_NUM_THREADS=$SLURM_CPUS_PER_TASK

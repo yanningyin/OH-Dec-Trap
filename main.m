@@ -70,16 +70,41 @@ switch example_no
 
     case 7
         % Replot the trajectories during loading and trapping
-        path_to_traj_mat_file = './test.mat';
+        path_to_traj_mat_file = '/Users/yanning/Documents/MATLAB/OH-Dec-Trap/data/traj/traj_data_20260301_012347.mat';
         load(path_to_traj_mat_file);
         for k=1:length(trajectory(1,1,:))
             plot3(trajectory(:,2,k), trajectory(:,3,k), trajectory(:,4,k));hold on;
         end
+        mm=1e-3;        
+        hold on
+        plot([-6.5*mm, -2*mm],[-1.5*mm, -1.5*mm], 'k-');
+        plot([-6.5*mm, -2*mm],[1.5*mm, 1.5*mm], 'k-');
+        plot([-1.25*mm, -0.75*mm],[-1.75*mm, -1.75*mm], 'k-');
+        plot([-1.25*mm, -0.75*mm],[1.75*mm, 1.75*mm], 'k-');
+        plot([0.75*mm,1.25*mm],[-1.75*mm, -1.75*mm], 'k-');
+        plot([0.75*mm,1.25*mm],[1.75*mm, 1.75*mm], 'k-');
+
+        plot([-6.5*mm, -6.5*mm],[-2.5*mm, -1.5*mm], 'k-');
+        plot([-2*mm, -2*mm],[-2.5*mm, -1.5*mm], 'k-');
+        plot([-6.5*mm, -6.5*mm],[1.5*mm, 2.5*mm], 'k-');
+        plot([-2*mm, -2*mm],[1.5*mm, 2.5*mm], 'k-');
+        plot([-6.5*mm, -2*mm],[1.5*mm, 1.5*mm], 'k-');
+
+        plot([-1.25*mm, -1.25*mm],[-2.5*mm, -1.75*mm], 'k-');
+        plot([1.25*mm, 1.25*mm],[-2.5*mm, -1.75*mm], 'k-');
+        plot([-0.75*mm, -0.75*mm],[-2.5*mm, -1.75*mm], 'k-');
+        plot([0.75*mm, 0.75*mm],[-2.5*mm, -1.75*mm], 'k-');
+
+        plot([-1.25*mm, -1.25*mm],[1.75*mm, 2.5*mm], 'k-');
+        plot([1.25*mm, 1.25*mm],[1.75*mm, 2.5*mm], 'k-');
+        plot([-0.75*mm, -0.75*mm],[1.75*mm, 2.5*mm], 'k-');
+        plot([0.75*mm, 0.75*mm],[1.75*mm, 2.5*mm], 'k-');
+        hold off
 
     case 8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         % Example: simulate the whole process
         tic;
-        params = Parameters('num_particles', 50000000);
+        params = Parameters('num_particles', 20000000);
         beam = Beam(params);
         beam.createParticles();
         nsteps = 10000;

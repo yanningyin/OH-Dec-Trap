@@ -4,7 +4,7 @@ addpath('src')
 rng('default') % fix the seed of the random nunber generator to be removed afterwards
 params = Parameters();
 
-example_no = 7; %{1: only dec; 2: only trap; 3: both}
+example_no = 8; %{1: only dec; 2: only trap; 3: both}
 
 switch example_no
     case 1

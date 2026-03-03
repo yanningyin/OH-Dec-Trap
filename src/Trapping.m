@@ -289,7 +289,7 @@ classdef Trapping < handle
                 %%% Molecules are considered lost if they are 1) out of the
                 %%% acceleration field range (x < 5 mm, y/z < 2 mm) or 2)
                 %%% radially out of coil's hole when passing through coil
-                if (~(abs(traj(end,3)) < 0.002 && abs(traj(end,4)) < 0.002 && traj(end,2) < 0.005 && traj(end,2) > -0.015)) ...
+                if (~(abs(traj(end,3)) < 0.002 && abs(traj(end,4)) < 0.002 && traj(end,2) < 0.002 && traj(end,2) > -0.015)) ...
                         || (traj(end,2)>-0.0065 && traj(end,2)<-0.002 && traj(end,3)^2+traj(end,4)^2>obj.params.TRAP_coil_inner_radis^2)
                     break
                 end

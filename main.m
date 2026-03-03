@@ -4,7 +4,7 @@ addpath('src')
 rng('default') % fix the seed of the random nunber generator to be removed afterwards
 params = Parameters();
 
-example_no = 8; %{1: only dec; 2: only trap; 3: both}
+example_no = 7; %{1: only dec; 2: only trap; 3: both}
 
 switch example_no
     case 1
@@ -73,7 +73,7 @@ switch example_no
         path_to_traj_mat_file = '/Users/yanning/Documents/MATLAB/OH-Dec-Trap/data/traj/traj_data_20260301_012347.mat';
         load(path_to_traj_mat_file);
         for k=1:length(trajectory(1,1,:))
-            plot3(trajectory(:,2,k), trajectory(:,3,k), trajectory(:,4,k));hold on;
+            plot3(trajectory(end-100:end,2,k), trajectory(end-100:end,3,k), trajectory(end-100:end,4,k));hold on;
         end
         mm=1e-3;        
         hold on

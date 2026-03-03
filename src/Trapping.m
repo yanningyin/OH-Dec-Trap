@@ -303,7 +303,7 @@ classdef Trapping < handle
 
                 traj(end+1,:) = [t+dt, x, y, z, vx, vy, vz]; 
             end
-            if abs(traj(end,2)) <= 0.002  %  trap control, changed from 0.002 to 0.005 by Yin.
+            if abs(traj(end,2)) <= 0.002  %  trap control
                 obj.traj_time = traj(:,1);
                 obj.traj_xyzVxyz = traj(:, 2:7);% [traj(:,2), traj(:,3), traj(:,4), traj(:,5), traj(:,6), traj(:,7)];
             else

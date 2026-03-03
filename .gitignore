@@ -1,5 +1,6 @@
 # List of untracked files to ignore
 logs/
+*.txt
 # MATLAB
 *.mat
 *.out

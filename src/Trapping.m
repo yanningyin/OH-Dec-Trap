@@ -74,7 +74,7 @@ classdef Trapping < handle
             fprintf('Loading acceleration fields ...\t')
 
             load('data/acc/acc_combined/acc_ringmags') % load them in local workspace
-            obj.ax_mag = accx*0.86; obj.ay_mag= accy*0.86; obj.az_mag= accz*0.86;  %因为OH的磁偶极矩没有1.41，而是1.21所以1.21/1.41=0.86
+            obj.ax_mag = accx; obj.ay_mag= accy; obj.az_mag= accz;  %因为OH的磁偶极矩没有1.41，而是1.21所以1.21/1.41=0.86
             clearvars accx accy accz % ugly: clear them from local workspace
 
             load('data/acc/acc_combined/acc_' + string( obj.params.TRAP_coil_current ) + 'A') % load them in local workspace
